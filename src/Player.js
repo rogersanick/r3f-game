@@ -9,8 +9,6 @@ import useGame from './hooks/useGame.js';
 
 export default function Player() {
   const [subscribeKeys, getKeys] = useKeyboardControls();
-  //   console.log('subscribe', subscribeKeys);
-  //   console.log('get', getKeys);
   const body = useRef();
 
   const { rapier, world } = useRapier();
@@ -108,7 +106,7 @@ export default function Player() {
     const bodyPosition = body.current.translation();
     const cameraPosition = new THREE.Vector3();
     cameraPosition.copy(bodyPosition);
-    cameraPosition.z += 2.25;
+    cameraPosition.z += 3;
     cameraPosition.y += 0.65;
 
     const cameraTarget = new THREE.Vector3();

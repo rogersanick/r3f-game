@@ -48,22 +48,22 @@ export function BlockStart({ position = [0, 0, 0] }) {
         <Text
           font="./bebas-neue-v9-latin-regular.woff"
           scale={0.24}
-          position={[0.5, 0.65, 0]}
+          position={[0.55, 0.65, 0]}
           maxWidth={0.25}
           lineHeight={0.75}
           textAlign="right"
           rotation-y={-0.55}
           color="#fff33a"
         >
-          The super secret Marble Ninja Warrior
+          Super secret Marble Ninja Game
           <meshBasicMaterial toneMapped={false} />
         </Text>
       </Float>
       <Float floatIntensity={0.75} rotationIntensity={0.5}>
         <Text
           font="./bebas-neue-v9-latin-regular.woff"
-          scale={0.1}
-          position={[-0.55, 0.65, 0.4]}
+          scale={0.2}
+          position={[-0.5, 0.65, 0.4]}
           maxWidth={0.5}
           lineHeight={0.75}
           textAlign="left"
@@ -360,7 +360,7 @@ export function Level({ count = 5, types = [BlockSpinner, BlockLimbo, BlockAxe],
       blocks.push(type);
     }
     return blocks;
-  }, [count, types, seed]);
+  }, [count, seed]);
 
   return (
     <>

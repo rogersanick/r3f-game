@@ -9,6 +9,7 @@ export default create(
       startTime: 0,
       endTime: 0,
       phase: 'ready',
+      glitchActive: false,
 
       start: () => {
         set((state) => {
@@ -35,6 +36,10 @@ export default create(
           }
           return {};
         });
+      },
+
+      setGlitchActive: (active) => {
+        set(() => ({ glitchActive: active }));
       },
 
       getEndTime: () => {
