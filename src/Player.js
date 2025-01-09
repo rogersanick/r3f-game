@@ -10,6 +10,7 @@ import useGame from './hooks/useGame.js';
 export default function Player() {
   const [subscribeKeys, getKeys] = useKeyboardControls();
   const body = useRef();
+  const isJumping = useRef(false);
 
   const { rapier, world } = useRapier();
   const rapierWorld = world.raw();
@@ -23,11 +24,13 @@ export default function Player() {
   const blocksCount = useGame((state) => state.blocksCount);
 
   const jump = () => {
+    if (isJumping.current) return;
+    isJumping.current = true;
+
     const origin = body.current.translation();
     origin.y -= 0.31;
 
     const direction = { x: 0, y: -1, z: 0 };
-    // console.log(origin);
 
     const ray = new rapier.Ray(origin, direction);
     const hit = rapierWorld.castRay(ray, 10, true);
@@ -36,7 +39,9 @@ export default function Player() {
       body.current.applyImpulse({ x: 0, y: 0.5, z: 0 });
     }
 
-    // body.current.applyImpulse({ x: 0, y: 0.5, z: 0 });
+    setTimeout(() => {
+      isJumping.current = false;
+    }, 500); // Assuming 500ms is enough time for a jump to complete
   };
 
   const reset = () => {
@@ -64,6 +69,14 @@ export default function Player() {
       }
     );
 
+    const handleDomJump = () => {
+      if (!isJumping.current) {
+        jump();
+      }
+    };
+
+    window.addEventListener('jump', handleDomJump);
+
     const unsubscribeAny = subscribeKeys(() => {
       start();
     });
@@ -72,6 +85,7 @@ export default function Player() {
       unsubscribeReset();
       unsubscribeJump();
       unsubscribeAny();
+      window.removeEventListener('jump', handleDomJump);
     };
   }, []);
 

@@ -6,6 +6,8 @@ import Interface from './Interface';
 import { EffectComposer, Glitch } from '@react-three/postprocessing';
 import { useEffect, useMemo, useState } from 'react';
 import useGame from './hooks/useGame.js';
+import JoyStickComponent from './JoyStick.js';
+import JumpButton from './JumpButton.js';
 
 function App() {
   const setGlitchActive = useGame((state) => state.setGlitchActive);
@@ -77,6 +79,10 @@ function App() {
       {isGlitchActive && message && <div className="message-overlay">
         {message}
       </div>}
+      <div style={{ position: 'absolute', bottom: 20, right: 20, zIndex: 1001 }}>
+        <JoyStickComponent />
+      </div>
+      <JumpButton />
       <Canvas
         shadows
         camera={{
