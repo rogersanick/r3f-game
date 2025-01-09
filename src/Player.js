@@ -140,7 +140,7 @@ export default function Player() {
         linearDamping={0.5}
       >
         <mesh castShadow>
-          <icosahedronGeometry args={[0.3, 1]} />
+          <sphereGeometry args={[0.3, 32, 32]} />
           <meshStandardMaterial flatShading color="#6369d1" />
         </mesh>
       </RigidBody>

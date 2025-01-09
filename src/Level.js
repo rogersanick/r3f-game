@@ -12,29 +12,28 @@ import useGame from './hooks/useGame';
 
 const boxGeometry = new THREE.BoxGeometry(1, 1, 1);
 const floor1Material = new THREE.MeshStandardMaterial({
-  color: '#2b9720',
+  color: '#d20b7a', // Complementary neon color of '#2b9720'
   metalness: 0.5,
   roughness: 0.5,
 });
 const floor2Material = new THREE.MeshStandardMaterial({
-  color: '#5ef38c',
+  color: '#a10c73', // Complementary neon color of '#5ef38c'
   metalness: 0.5,
   roughness: 0.5,
 });
 const obstacleMaterial = new THREE.MeshStandardMaterial({
-  color: '#ee6055',
+  color: '#11faaa', // Complementary neon color of '#ee6055'
   metalness: 0.5,
   roughness: 1,
 });
 const wallMaterial = new THREE.MeshStandardMaterial({
-  // color: '#44ccff',
-  color: '#a5abaf',
+  color: '#04D9FF', // Neon blue color
   metalness: 0.9,
   roughness: 0.01,
 });
 
 const boxMaterial = new THREE.MeshStandardMaterial({
-  color: '#2291fc',
+  color: '#dcd60b', // Complementary neon color of '#2291fc'
   metalness: Math.random(),
   roughness: Math.random(),
 });
