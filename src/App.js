@@ -43,9 +43,9 @@ function App() {
         setGlitchActive(true);
         glitchTimeout = setTimeout(() => {
           setGlitchActive(false);
-        }, 1000);
+        }, 2000); // Increased duration to 2 seconds
       }
-    }, 4000); // 1 second active + 3 seconds delay
+    }, 7000); // Reduced frequency: 2 seconds active + 6 seconds delay
 
     return () => {
       clearInterval(interval);
