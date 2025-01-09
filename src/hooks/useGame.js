@@ -2,7 +2,7 @@ import create from 'zustand';
 import { subscribeWithSelector } from 'zustand/middleware';
 
 export default create(
-  subscribeWithSelector((set) => {
+  subscribeWithSelector((set, get) => {
     return {
       blocksCount: 50,
       blocksSeed: 0,
@@ -35,6 +35,10 @@ export default create(
           }
           return {};
         });
+      },
+
+      getEndTime: () => {
+        return get().endTime;
       },
     };
   })

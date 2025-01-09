@@ -7,6 +7,8 @@ THREE.ColorManagement.legacyMode = false;
 
 import { CuboidCollider, RigidBody } from '@react-three/rapier';
 import { Float, Text, useGLTF } from '@react-three/drei';
+import ExplosionConfetti from './Confetti';
+import useGame from './hooks/useGame';
 
 const boxGeometry = new THREE.BoxGeometry(1, 1, 1);
 const floor1Material = new THREE.MeshStandardMaterial({
@@ -53,7 +55,7 @@ export function BlockStart({ position = [0, 0, 0] }) {
           rotation-y={-0.55}
           color="#fff33a"
         >
-          Maddie&apos;s Marble Ninja Warrior
+          The super secret Marble Ninja Warrior
           <meshBasicMaterial toneMapped={false} />
         </Text>
       </Float>
@@ -67,7 +69,7 @@ export function BlockStart({ position = [0, 0, 0] }) {
           textAlign="left"
           rotation-y={0.55}
         >
-          can you beat 30s?
+          can you beat 25s?
           <meshBasicMaterial toneMapped={false} />
         </Text>
       </Float>
@@ -90,6 +92,7 @@ export function BlockEnd({ position = [0, 0, 0] }) {
   hamburger.scene.children.forEach((mesh) => {
     mesh.castShadow = true;
   });
+  const phase = useGame((state) => state.phase);
 
   const finishBoxGeometry = new THREE.BoxGeometry(0.5, 0.5, 0.5);
 
@@ -102,12 +105,44 @@ export function BlockEnd({ position = [0, 0, 0] }) {
     gravityScale: 0.3,
   };
 
+  const endTime = useGame((state) => state.endTime);
+  const startTime = useGame((state) => state.startTime);
+  const timeElapsed = (endTime - startTime) / 1000;
   return (
     <group position={position}>
       <Text font="./bebas-neue-v9-latin-regular.woff" scale={0.5} position={[0, 2.25, 0]}>
         Finish
         <meshBasicMaterial toneMapped={false} />
       </Text>
+      {phase === 'ended' && timeElapsed <= 25 && (
+        <>
+          <ExplosionConfetti 
+            position={[0, 4, 0]}             
+            rate={2.5}
+            amount={45}
+            scale={10}
+            fallingHeight={10}
+            enableShadows
+            isExploding
+            colors={['#FFC0CB', '#FFB6C1', '#FF69B4', '#FF1493', '#DB7093']}
+          />
+        </>
+      )}
+      <Float>
+        {phase === 'ended' && timeElapsed <= 25 && (
+          <>
+            <Text font="./bebas-neue-v9-latin-regular.woff" scale={0.5} position={[0, 1, 0]}>
+              {`We're Expecting!`}
+              <meshBasicMaterial toneMapped={false} />
+            </Text>
+            <Text font="./bebas-neue-v9-latin-regular.woff" scale={0.3} position={[0, 0.6, 0]}>
+              {`It's a girl!`}
+              <meshBasicMaterial toneMapped={false} />
+            </Text>
+          </>
+
+        )}
+      </Float>
       <mesh
         ref={blockRef}
         geometry={boxGeometry}
@@ -116,15 +151,6 @@ export function BlockEnd({ position = [0, 0, 0] }) {
         receiveShadow
         material={floor1Material}
       />
-      {/* <RigidBody
-        // type="fixed"
-        colliders="hull"
-        position={[0, 0.25, 0]}
-        restitution={0.2}
-        friction={0}
-      >
-        <primitive object={hamburger.scene} scale={0.2} />
-      </RigidBody> */}
       <RigidBody {...props} position={[-0.51, 0.25, 0]} rotation-y={[-0.25]}>
         <mesh castShadow material={boxMaterial} geometry={finishBoxGeometry} />
       </RigidBody>
