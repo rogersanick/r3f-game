@@ -54,13 +54,15 @@ function App() {
   }, [phase, setGlitchActive]);
 
   useEffect(() => {
-    if (isGlitchActive) {
+    if (phase === 'ended') {
+      setMessage('');
+    } else if (isGlitchActive) {
       const randomIndex = Math.floor(Math.random() * messages.length);
       setMessage(messages[randomIndex]);
     } else {
       setMessage('');
     }
-  }, [isGlitchActive, messages]);
+  }, [isGlitchActive, messages, phase]);
 
   return (
     <KeyboardControls
