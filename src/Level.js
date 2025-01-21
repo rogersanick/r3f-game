@@ -68,7 +68,7 @@ export function BlockStart({ position = [0, 0, 0] }) {
           textAlign="left"
           rotation-y={0.55}
         >
-          can you beat 25s?
+          can you beat 48s?
           <meshBasicMaterial toneMapped={false} />
         </Text>
       </Float>
@@ -113,7 +113,7 @@ export function BlockEnd({ position = [0, 0, 0] }) {
         Finish
         <meshBasicMaterial toneMapped={false} />
       </Text>
-      {phase === 'ended' && timeElapsed <= 25 && (
+      {phase === 'ended' && timeElapsed <= 48 && (
         <>
           <ExplosionConfetti 
             position={[0, 4, 0]}             
@@ -128,7 +128,7 @@ export function BlockEnd({ position = [0, 0, 0] }) {
         </>
       )}
       <Float>
-        {phase === 'ended' && timeElapsed <= 25 && (
+        {phase === 'ended' && timeElapsed <= 48 && (
           <>
             <Text font="./bebas-neue-v9-latin-regular.woff" scale={0.5} position={[0, 1, 0]}>
               {`We're Expecting!`}
