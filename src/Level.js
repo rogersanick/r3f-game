@@ -68,7 +68,7 @@ export function BlockStart({ position = [0, 0, 0] }) {
           textAlign="left"
           rotation-y={0.55}
         >
-          can you beat 48s?
+          Stefan, can you beat 48s?
           <meshBasicMaterial toneMapped={false} />
         </Text>
       </Float>
